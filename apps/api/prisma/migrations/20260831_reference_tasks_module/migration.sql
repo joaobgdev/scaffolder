@@ -5,6 +5,10 @@
 CREATE TYPE "TaskStatus" AS ENUM ('PENDING', 'IN_PROGRESS', 'COMPLETED', 'CANCELLED');
 CREATE TYPE "TaskPriority" AS ENUM ('LOW', 'MEDIUM', 'HIGH', 'URGENT');
 
+CREATE TYPE "TaskCategory" AS ENUM ('PERSONAL','WORK','STUDY','HEALTH','FINANCE','OTHER');
+ALTER TABLE "tasks" ADD COLUMN "category" "TaskCategory" NOT NULL DEFAULT 'OTHER';
+CREATE INDEX "tasks_category_idx" ON "tasks"("category");
+
 -- Consulta 002: Criação da tabela tasks
 CREATE TABLE "tasks" (
     "id" UUID NOT NULL DEFAULT gen_random_uuid(),
